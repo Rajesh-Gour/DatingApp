@@ -25,6 +25,7 @@ login(model: any) {
 
 register(model: any) {
 
-return this.http.post(this.baseUrl + 'register' , model);
+  console.log(model);
+  return this.http.post(this.baseUrl + 'register' , model);
 }
 }
