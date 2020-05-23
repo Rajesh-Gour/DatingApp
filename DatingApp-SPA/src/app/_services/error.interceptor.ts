@@ -17,9 +17,9 @@ export class ErrorInterceptor implements HttpInterceptor {
                 if (error.status === 401) {
                     return throwError(error.statusText);
                 }
-                if (error.status === 400) {
+               /* if (error.status === 400) {
                     return throwError(error.error);
-                }
+                }*/
                 const applicationError = error.headers.get('Application-Error');
                 if (applicationError) {
                     return throwError(applicationError);
@@ -28,7 +28,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 const serverError = error.error;
                 let modelStateErrors = '';
 
-                if (serverError.errors && typeof serverError.errors === 'object') {
+                if ((error.status === 400) || (serverError.errors && typeof serverError.errors === 'object')) {
                     for (const key in serverError.errors) {
                         if (serverError.errors[key]) {
                            modelStateErrors += serverError.errors[key] + '\n' ;
