@@ -20,9 +20,7 @@ values: any = {};
 
   getValues() {
     this.http.get('http://localhost:5000/api/values/2').subscribe(response => {
-    this.values = response;
-    console.log(this.values);
-  },
+    this.values = response; },
   error  => {
     console.log(error);
   });
