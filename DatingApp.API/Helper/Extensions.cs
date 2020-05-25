@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Http;
 
 namespace DatingApp.API.Helper
@@ -11,5 +12,16 @@ namespace DatingApp.API.Helper
             response.Headers.Add("Access-Control-Expose-Headers","Application-Error");
             response.Headers.Add("Access-Control-Allow-Origin","*");
         }
+
+        public static int CalculateAge(this DateTime dateTime)
+        {
+            var age = DateTime.Today.Year-dateTime.Year;
+            if (dateTime.AddYears(age) > DateTime.Today)
+            {
+                return age--;
+            }
+            return age;
+        }
+        
     }
 }

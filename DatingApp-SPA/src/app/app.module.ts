@@ -40,10 +40,6 @@ import { appRoutes } from './routes';
       BsDropdownModule.forRoot(),
       RouterModule.forRoot(appRoutes)
    ],
-   exports: [
-      RouterModule
-    ]
-   ,
    providers: [
       {
          provide: HTTP_INTERCEPTORS,

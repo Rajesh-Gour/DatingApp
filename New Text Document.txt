@@ -1,3 +1,4 @@
 dotnet new webapi -n DatingApp.API
 https://dotnet.microsoft.com/download/dotnet-core/3.0
-test new
+dotnet ef migrations add extendedUserClass
+dotnet ef database update
