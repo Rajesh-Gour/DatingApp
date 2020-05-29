@@ -1,3 +1,6 @@
+import { AlertifyService } from './_services/alertify.service';
+import { UserService } from './_services/user.service';
+import { MemberEditComponent } from './_members/member-edit/member-edit.component';
 import { MemberListResolver } from './_resolvers/member-list.resolver';
 import { MemberDetailResolver } from './_resolvers/member-detail.resolver';
 import { MemberDetailComponent } from './_members/member-detail/member-detail.component';
@@ -23,6 +26,8 @@ import { MemberListComponent } from './_members/member-list/member-list.componen
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes-guards';
 
 
 
@@ -49,7 +54,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       ListsComponent,
       MessagesComponent,
       MemberCardComponent,
-      MemberDetailComponent
+      MemberDetailComponent,
+      MemberEditComponent
       
    ],
    imports: [
@@ -78,8 +84,12 @@ export class CustomHammerConfig extends HammerGestureConfig  {
          multi: true
        },
       AuthService,
+      UserService,
+      AlertifyService,
       MemberDetailResolver,
+      MemberEditResolver,
       MemberListResolver,
+      PreventUnsavedChanges,
       { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
    ],
    bootstrap: [
