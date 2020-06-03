@@ -1,3 +1,4 @@
+import { PhotoEditorComponent } from './_members/photo-editor/photo-editor.component';
 import { AlertifyService } from './_services/alertify.service';
 import { UserService } from './_services/user.service';
 import { MemberEditComponent } from './_members/member-edit/member-edit.component';
@@ -28,6 +29,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { appRoutes } from './routes';
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes-guards';
+import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module';
 
 
 
@@ -55,8 +57,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       MessagesComponent,
       MemberCardComponent,
       MemberDetailComponent,
-      MemberEditComponent
-      
+      MemberEditComponent,
+      PhotoEditorComponent,      
    ],
    imports: [
       BrowserModule,
@@ -74,9 +76,9 @@ export class CustomHammerConfig extends HammerGestureConfig  {
             }
          }
       ),
-      NgxGalleryModule
-      
-   ],
+      NgxGalleryModule,
+      FileUploadModule
+      ],
    providers: [
       {
          provide: HTTP_INTERCEPTORS,
