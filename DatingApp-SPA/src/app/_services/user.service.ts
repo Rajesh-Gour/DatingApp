@@ -32,7 +32,8 @@ getUsers(): Observable<User[]> {
 
 getUser(id): Observable<User> {
 
-  return this.http.get<User>(this.baseUrl + 'users/Getuser/?id=' + id );
+  //console.log(this.baseUrl + 'Users/GetUser/' + id);
+  return this.http.get<User>('http://localhost:5000/api/Users/' + id);
 
 }
 

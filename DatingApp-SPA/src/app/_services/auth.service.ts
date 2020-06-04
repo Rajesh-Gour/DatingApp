@@ -43,10 +43,10 @@ login(model: any) {
   );
 }
 
-register(model: any) {
+register(user: User) {
 
-  console.log(model);
-  return this.http.post(this.baseUrl + 'register' , model);
+  //console.log(user);
+  return this.http.post(this.baseUrl + 'register' , user);
 }
 
 loggedIn() {
