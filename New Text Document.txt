@@ -3,3 +3,4 @@ https://dotnet.microsoft.com/download/dotnet-core/3.0
 dotnet ef migrations add extendedUserClass
 dotnet ef database update
 npm install font-awesome --save
+http://localhost:5000/api/Users/GetUsers?pagesize=3 &&PageNumber=5
