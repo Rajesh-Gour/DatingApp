@@ -4,3 +4,8 @@ dotnet ef migrations add extendedUserClass
 dotnet ef database update
 npm install font-awesome --save
 http://localhost:5000/api/Users/GetUsers?pagesize=3 &&PageNumber=5
+
+remove migration if applied to database
+dotnet ef database update 20200529215934_addedPublicIdandUser
+then remove migration from code
+dotnet ef migrations remove

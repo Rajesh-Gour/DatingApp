@@ -1,3 +1,4 @@
+import { ListsResolver } from './_resolvers/lists-resolver';
 import { PhotoEditorComponent } from './_members/photo-editor/photo-editor.component';
 import { AlertifyService } from './_services/alertify.service';
 import { UserService } from './_services/user.service';
@@ -99,6 +100,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       MemberDetailResolver,
       MemberEditResolver,
       MemberListResolver,
+      ListsResolver,
       PreventUnsavedChanges,
       { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
    ],
