@@ -69,6 +69,15 @@ namespace DatingApp.API
             });
 
             services.AddScoped<LogUserActivity>();
+            services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    // Use the default property (Pascal) casing
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
+
+
 
             //services.AddAuthorization();
         }

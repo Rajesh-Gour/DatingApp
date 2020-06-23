@@ -2,16 +2,19 @@ import { Photo } from './../../_models/photo';
 import { AlertifyService } from './../../_services/alertify.service';
 import { UserService } from './../../_services/user.service';
 import { User } from './../../_models/User';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterContentInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import { TabsetComponent } from '../../../../node_modules/ngx-bootstrap';
+
 
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
   styleUrls: ['./member-detail.component.css']
 })
-export class MemberDetailComponent implements OnInit {
+export class MemberDetailComponent implements OnInit, AfterViewInit{
+@ViewChild('membertabs', {static: false}) memberTabs: TabsetComponent;
 @Input() user: User;
 galleryOptions: NgxGalleryOptions[];
 galleryImages: NgxGalleryImage[];
@@ -21,10 +24,26 @@ galleryImages: NgxGalleryImage[];
     private alertifyService: AlertifyService,
     private route: ActivatedRoute) { }
 
+    ngAfterViewInit() {
+      setTimeout(() => {
+        this.route.queryParams.subscribe((params) => {
+          const selectTab = +params['tab'];
+          this.memberTabs.tabs[selectTab > 0 ? selectTab : 0].active = true;
+        });
+      });
+    }
+    
   ngOnInit() {
     this.route.data.subscribe((data) => {
     this.user = data['user'];
     });
+
+    // this.route.queryParams.subscribe(params =>{
+      
+    //   const selectedTab = params['tab'];
+    //   console.log(selectedTab);
+    //   this.memberTabs.tabs[3].active = true;
+    // });
 
     this.galleryOptions = [
       {
@@ -52,5 +71,10 @@ galleryImages: NgxGalleryImage[];
      }); 
     }
     return imageUrls;
+  }
+
+  selectTab(tabId: number) {
+
+      this.memberTabs.tabs[tabId].active = true;
   }
 }

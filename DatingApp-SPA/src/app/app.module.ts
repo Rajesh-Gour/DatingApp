@@ -1,3 +1,5 @@
+import { MemberMessagesComponent } from './_members/member-messages/member-messages.component';
+import { MessagesResolver } from './_resolvers/messages.resolver';
 import { ListsResolver } from './_resolvers/lists-resolver';
 import { PhotoEditorComponent } from './_members/photo-editor/photo-editor.component';
 import { AlertifyService } from './_services/alertify.service';
@@ -56,6 +58,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       HomeComponent,
       RegisterComponent,
       MemberListComponent,
+      MemberMessagesComponent,
       ListsComponent,
       MessagesComponent,
       MemberCardComponent,
@@ -101,6 +104,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       MemberEditResolver,
       MemberListResolver,
       ListsResolver,
+      MessagesResolver,
       PreventUnsavedChanges,
       { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
    ],

@@ -30,7 +30,7 @@ likesParam: string;
       this.pagination = data['users'].pagination;
     });
 
-    console.log(this.users);
+    //console.log(this.users);
     this.likesParam = 'likers';
   }
 
