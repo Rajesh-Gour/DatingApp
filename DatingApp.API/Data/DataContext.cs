@@ -7,6 +7,10 @@ namespace DatingApp.API.Data
 {
     public class DataContext:DbContext
     {
+        //My sql connection string
+        //"DefaultConnection":"Server=localhost;Database=datingapp;Uid=appuser;pwd=password"
+        //Sql server connection string
+        //"DefaultConnection":"Server=localhost;Database=datingapp;User Id=appuser;Password=password"
         public DataContext(DbContextOptions<DataContext> options):base(options)
         {
 

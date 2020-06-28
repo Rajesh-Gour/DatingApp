@@ -76,7 +76,8 @@ getUsers(page?, itemsPerPage?, userParams?, likesParams?): Observable<PaginatedR
 getUser(id): Observable<User> {
 
   //console.log(this.baseUrl + 'Users/GetUser/' + id);
-  return this.http.get<User>('http://localhost:5000/api/Users/' + id);
+  //return this.http.get<User>('http://localhost:5000/api/Users/' + id);
+  return this.http.get<User>( this.baseUrl + 'Users/' + id);
 
 }
 

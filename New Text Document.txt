@@ -9,3 +9,10 @@ remove migration if applied to database
 dotnet ef database update 20200529215934_addedPublicIdandUser
 then remove migration from code
 dotnet ef migrations remove
+
+SQL Server Cred :
+
+uid :sa
+
+
+linux digialocean

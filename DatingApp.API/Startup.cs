@@ -38,10 +38,29 @@ namespace DatingApp.API
        
         public IConfiguration Configuration { get; }
 
+        public void ConfigureDevelopmentServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(X => X.UseSqlite
+            (Configuration.GetConnectionString("DefaultConnection")));
+            
+            ConfigureServices(services);
+        }
+
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            // Once my sql installed un-comment below 2 lines
+            // services.AddDbContext<DataContext>(X => X.UseMySql
+            // (Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(X => X.UseSqlite
+            (Configuration.GetConnectionString("DefaultConnection")));
+            
+            ConfigureServices(services);
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(X => X.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<DataContext>(X => X.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             //Video 76
             // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
             // .AddJsonOptions ( opt => {
@@ -119,9 +138,14 @@ namespace DatingApp.API
 
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+
+            app.UseStaticFiles();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
