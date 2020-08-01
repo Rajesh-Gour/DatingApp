@@ -13,7 +13,7 @@ using DatingApp.API.Helper;
 namespace DatingApp.API.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))]
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -31,10 +31,10 @@ namespace DatingApp.API.Controllers
         public async Task<IActionResult> GetUsers([FromQuery]UserParams userParams)
         {
             var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
+            var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == userParams.UserId;
             userParams.UserId = currentUserId;
 
-            var userFromRepo = await _repo.GetUser(currentUserId);
+            var userFromRepo = await _repo.GetUser(currentUserId,isCurrentUser);
 
             if (string.IsNullOrEmpty(userParams.Gender))
             {
@@ -52,8 +52,9 @@ namespace DatingApp.API.Controllers
         [HttpGet("{id}", Name="GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
+            var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == id;
 
-            var user = await _repo.GetUser(id);
+            var user = await _repo.GetUser(id,isCurrentUser);
 
             var userToReturn=_mapper.Map<UserForDetailedDto>(user);
 
@@ -63,11 +64,14 @@ namespace DatingApp.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, UserForUpdateDto userUpdateDto)
         {
+            var isCurrentUser = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) == id;
+            
+
             if (id!=int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
             {
              return Unauthorized();   
             }
-            var userFromRepo = await _repo.GetUser(id);
+            var userFromRepo = await _repo.GetUser(id,isCurrentUser);
 
             //var userFromRepo=_mapper.Map<UserForDetailedDto>(user);
 
@@ -96,7 +100,7 @@ namespace DatingApp.API.Controllers
               return BadRequest("You already liked this user");
           }
 
-          if (await _repo.GetUser(id) == null)
+          if (await _repo.GetUser(id,false) == null)
           {
               return NotFound();
           }
